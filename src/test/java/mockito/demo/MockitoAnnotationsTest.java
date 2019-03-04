@@ -22,7 +22,7 @@ public class MockitoAnnotationsTest {
     List<String> spiedList = new ArrayList<>();
 
     @Captor
-    ArgumentCaptor argCaptor;
+    ArgumentCaptor<String> argumentCaptor;
 
     @Mock
     Map<String, String> wordMap;
@@ -31,16 +31,16 @@ public class MockitoAnnotationsTest {
     MyDictionary dic = new MyDictionary();
 
     @Test
-    public void whenUseMockAnnotation_thenMockIsInjected() {
+    public void useMockAnnotation() {
         mockedList.add("one");
-        Mockito.verify(mockedList).add("one");
+        Mockito.verify(mockedList).add("one"); // verify if 'add("one") was called before
         assertThat(mockedList.size()).isEqualTo(0);
         Mockito.when(mockedList.size()).thenReturn(100);
         assertThat(mockedList.size()).isEqualTo(100);
     }
 
     @Test
-    public void whenUseSpyAnnotation_thenSpyIsInjected() {
+    public void UseSpyAnnotation() {
         spiedList.add("one");
         spiedList.add("two");
         Mockito.verify(spiedList).add("one");
@@ -51,14 +51,14 @@ public class MockitoAnnotationsTest {
     }
 
     @Test
-    public void whenUseCaptorAnnotation_thenTheSam() {
+    public void useCaptorAnnotation() {
         mockedList.add("one");
-//        Mockito.verify(mockedList).add(argCaptor.capture());
-//        assertThat(argCaptor.getValue()).isEqualTo("one");
+        Mockito.verify(mockedList).add(argumentCaptor.capture());
+        assertThat(argumentCaptor.getValue()).isEqualTo("one");
     }
 
     @Test
-    public void whenUseInjectMocksAnnotation_thenCorrect() {
+    public void useInjectMocksAnnotation() {
         Mockito.when(wordMap.get("aWord")).thenReturn("aMeaning");
         assertThat(dic.getMeaning("aWord")).isEqualTo("aMeaning");
     }
@@ -68,10 +68,6 @@ public class MockitoAnnotationsTest {
 
         public MyDictionary() {
             wordMap = new HashMap<>();
-        }
-
-        public void add(final String word, final String meaning) {
-            wordMap.put(word, meaning);
         }
 
         public String getMeaning(final String word) {
