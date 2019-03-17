@@ -1,4 +1,4 @@
-package mockito.demo;
+package mockito.schrader;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,12 +15,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MockitoWhenThenUsingAnnotationTest {
+public class WhenThenUsingTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    @Mock
+    @Mock // shorthand for 'Mockito.mock()' method
     MyList mockedList;
 
     @Test

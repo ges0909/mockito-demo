@@ -1,4 +1,4 @@
-package mockito.demo;
+package mockito.schrader;
 
 import com.google.common.collect.Lists;
 import org.junit.Rule;
@@ -18,10 +18,10 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
-public class MockitoVerifyTest {
+public class VerifyTest {
 
     @Rule
-    public MockitoRule rule = MockitoJUnit.rule(); // alternative to `@RunWith(MockitoJUnitRunner.class)`/**/
+    public MockitoRule rule = MockitoJUnit.rule(); // alternative to '@RunWith(MockitoJUnitRunner.class)'
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -57,7 +57,7 @@ public class MockitoVerifyTest {
         mockedList.size();
         mockedList.clear();
         verify(mockedList).size();
-        verifyNoMoreInteractions(mockedList); // throws 'NoInteractionsWanted' exception because of 'clear'
+        verifyNoMoreInteractions(mockedList); // throws 'NoInteractionsWanted' exception because 'clear()' was called
     }
 
     @Test
