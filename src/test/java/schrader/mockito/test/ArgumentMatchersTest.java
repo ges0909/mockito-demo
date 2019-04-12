@@ -1,4 +1,4 @@
-package mockito.schrader;
+package schrader.mockito.test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
