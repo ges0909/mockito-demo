@@ -40,6 +40,8 @@ Thumbs.db
 ################
 .gradle
 .m2
+.gradle
+build
 
 # Build output directies
 /target
@@ -60,6 +62,10 @@ atlassian-ide-plugin.xml
 .project
 .settings
 .metadata
+bin
 
 # NetBeans specific files/directories
 .nbattrs
+
+# VS Code
+.vscode
