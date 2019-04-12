@@ -1,4 +1,4 @@
-package mockito.callback;
+package schrader.mockito.callback;
 
 public class Response {
 

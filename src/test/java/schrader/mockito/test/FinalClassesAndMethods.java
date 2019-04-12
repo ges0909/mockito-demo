@@ -1,4 +1,4 @@
-package mockito.schrader;
+package schrader.mockito.test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +11,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class finalClassesAndMethods {
+public class FinalClassesAndMethods {
 
     @Mock
     MyList mockedList;
