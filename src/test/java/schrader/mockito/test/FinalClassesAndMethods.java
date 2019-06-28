@@ -1,29 +1,29 @@
 package schrader.mockito.test;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.AbstractList;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
-public class FinalClassesAndMethods {
+@ExtendWith(MockitoExtension.class)
+class FinalClassesAndMethods {
 
     @Mock
     MyList mockedList;
 
     @Test
-    public void whenMockFinalMethodMockWorks() {
+    void whenMockFinalMethodMockWorks() {
         when(mockedList.finalMethod()).thenReturn(1);
         assertThat(mockedList).isEqualTo(0);
     }
 
-    class MyList extends AbstractList {
-        final public int finalMethod() {
+    public class MyList extends AbstractList {
+        final int finalMethod() {
             return 0;
         }
 
@@ -38,7 +38,7 @@ public class FinalClassesAndMethods {
         }
     }
 
-    final class FinalList extends MyList {
+    public final class FinalList extends MyList {
 
         @Override
         public int size() {

@@ -1,53 +1,53 @@
 package schrader.mockito.test;
 
 import com.google.common.collect.Lists;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.exceptions.verification.NoInteractionsWanted;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.AbstractList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
-public class VerifyTest {
+@ExtendWith(MockitoExtension.class)
+class VerifyTest {
 
     @Mock
     MyList mockedList;
 
     @Test
-    public void verifyOnMethodInteraction() {
+    void verifyOnMethodInteraction() {
         mockedList.size();
         verify(mockedList).size();
     }
 
     @Test
-    public void verifyOnNoMethodInteraction() {
+    void verifyOnNoMethodInteraction() {
         verify(mockedList, times(0)).size();
     }
 
     @Test
-    public void verifyOnNumberOfInteractions() {
+    void verifyOnNumberOfInteractions() {
         mockedList.size();
         verify(mockedList, times(1)).size();
     }
 
     @Test
-    public void verifyOnNotOccurredInteractions() {
+    void verifyOnNotOccurredInteractions() {
         mockedList.size();
         verify(mockedList, never()).clear();
     }
 
     @Test
-    public void verifyWithAtLeast() {
+    void verifyWithAtLeast() {
         mockedList.clear();
         mockedList.clear();
         mockedList.clear();
@@ -55,7 +55,7 @@ public class VerifyTest {
     }
 
     @Test
-    public void verifyWithAtMost() {
+    void verifyWithAtMost() {
         mockedList.clear();
         mockedList.clear();
         mockedList.clear();
@@ -63,13 +63,13 @@ public class VerifyTest {
     }
 
     @Test
-    public void verifyOnNoInteractionsAtAll() {
+    void verifyOnNoInteractionsAtAll() {
         verifyZeroInteractions(mockedList);
         verify(mockedList, times(0)).size();
     }
 
     @Test
-    public void verifyOnUnexpectedInteractions() {
+    void verifyOnUnexpectedInteractions() {
         assertThrows(NoInteractionsWanted.class, () -> {
             mockedList.size();
             mockedList.clear();
@@ -79,7 +79,7 @@ public class VerifyTest {
     }
 
     @Test
-    public void verifyOnOrderOfInteractions() {
+    void verifyOnOrderOfInteractions() {
         mockedList.size();
         mockedList.add("a parameter");
         mockedList.clear();
@@ -90,19 +90,19 @@ public class VerifyTest {
     }
 
     @Test
-    public void verifyWithExactArgument() {
+    void verifyWithExactArgument() {
         mockedList.add("test");
         verify(mockedList).add("test");
     }
 
     @Test
-    public void verifyWithAnyArgument() {
+    void verifyWithAnyArgument() {
         mockedList.add("test");
         verify(mockedList).add(anyString());
     }
 
     @Test
-    public void verifyWithArgumentCapture() {
+    void verifyWithArgumentCapture() {
         mockedList.addAll(Lists.newArrayList("someElement"));
         ArgumentCaptor<List> argumentCaptor = ArgumentCaptor.forClass(List.class);
         verify(mockedList).addAll(argumentCaptor.capture());
@@ -111,7 +111,7 @@ public class VerifyTest {
     }
 
     @Test
-    public void verifyOnRealMethodCall() {
+    void verifyOnRealMethodCall() {
         doCallRealMethod().when(mockedList).add(any(Integer.class), any(String.class));
         mockedList.add(1, "real");
         verify(mockedList, times(1)).add(1, "real");

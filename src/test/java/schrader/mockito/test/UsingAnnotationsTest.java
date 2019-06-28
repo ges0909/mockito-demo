@@ -1,9 +1,9 @@
 package schrader.mockito.test;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,8 +12,8 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(MockitoJUnitRunner.class) // enables mockito annotations
-public class UsingAnnotationsTest {
+@ExtendWith(MockitoExtension.class) // enables mockito annotations
+class UsingAnnotationsTest {
 
     @Mock
     List<String> mockedList;
@@ -31,7 +31,7 @@ public class UsingAnnotationsTest {
     MyDictionary dictionary = new MyDictionary();
 
     @Test
-    public void mockAnnotation() {
+    void mockAnnotation() {
         mockedList.add("one");
         Mockito.verify(mockedList).add("one"); // verify if 'add("one")' was called before
         assertThat(mockedList.size()).isEqualTo(0);
@@ -40,7 +40,7 @@ public class UsingAnnotationsTest {
     }
 
     @Test
-    public void spyAnnotation() {
+    void spyAnnotation() {
         spiedList.add("one");
         Mockito.verify(spiedList).add("one");
         assertThat(spiedList.size()).isEqualTo(1);
@@ -49,14 +49,14 @@ public class UsingAnnotationsTest {
     }
 
     @Test
-    public void captorAnnotation() {
+    void captorAnnotation() {
         mockedList.add("one");
         Mockito.verify(mockedList).add(argumentCaptor.capture());
         assertThat(argumentCaptor.getValue()).isEqualTo("one");
     }
 
     @Test
-    public void injectMocksAnnotation() {
+    void injectMocksAnnotation() {
         Mockito.when(wordMap.get("aWord")).thenReturn("aMeaning");
         assertThat(dictionary.getMeaning("aWord")).isEqualTo("aMeaning");
     }
